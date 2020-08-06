@@ -26,15 +26,17 @@ namespace AspNetCoreMvc
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseRouting();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGet("/", async context =>
+            app.UseStaticFiles();
+            app.UseMvc(routes =>
                 {
-                    await context.Response.WriteAsync("Hello World!");
-                });
-            });
+                    routes.MapRoute(
+                       name: "default",
+                       template: "{controller=Home}/{action=Index}/{Id?}"
+                    );
+                }
+
+
+            );
         }
     }
 }
